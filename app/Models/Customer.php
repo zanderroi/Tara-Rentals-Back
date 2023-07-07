@@ -16,6 +16,8 @@ class Customer extends Model
      *
      * @var array<int, string>
      */
+    protected $table = 'customers';
+    
     protected $fillable = [
         'email',
         'password',
