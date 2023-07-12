@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'api',
         'passwords' => 'users',
     ],
 
@@ -40,16 +40,29 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
+        
         'customer' => [
-            'driver' => 'session',
+            'driver' => 'jwt',
             'provider' => 'customers',
         ],
-    
+
         'carowner' => [
-            'driver' => 'session',
+            'driver' => 'jwt',
             'provider' => 'carowners',
         ],
+        'api' => [
+            'driver' => 'jwt',
+            'provider' => 'customers'
+        ],
+                // 'customer' => [
+        //     'driver' => 'session',
+        //     'provider' => 'customers',
+        // ],
+    
+        // 'carowner' => [
+        //     'driver' => 'session',
+        //     'provider' => 'carowners',
+        // ],
     ],
 
     /*

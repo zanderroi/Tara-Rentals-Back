@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Customer extends Model
+class Customer extends Authenticatable implements JWTSubject
 {
     use HasFactory;
-    use SoftDeletes;
+    use SoftDeletes, HasApiTokens, Notifiable;
 
      /**
      * The attributes that are mass assignable.
@@ -24,6 +28,7 @@ class Customer extends Model
         'first_name',
         'last_name',
         'middle_initial',
+        'ext_name',
         'gender',
         'birthday',
         'house_no',
@@ -40,6 +45,7 @@ class Customer extends Model
         'supporting_id_number',
         'driverselicense_img',
         'driverselicense_img2',
+        'selfie_image',
         'supportingid_img',
         'supportingid_img2',
         'contactperson1',
@@ -57,9 +63,17 @@ class Customer extends Model
         'password',
         'remember_token',
     ];
-
+    
 
     protected $dates = ['deleted_at'];
 
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
 
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

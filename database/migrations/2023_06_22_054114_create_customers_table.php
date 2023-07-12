@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('middle_initial');
+            $table->string('middle_initial')->nullable();
+            $table->string('ext_name')->nullable();
             $table->enum('gender',['Male','Female']);
             $table->date('birthday');
             $table->integer('house_no');
@@ -38,6 +39,7 @@ return new class extends Migration
             $table->binary('driverselicense_img2');
             $table->binary('supportingid_img');
             $table->binary('supportingid_img2');
+            $table->binary('selfie_image');
             $table->string('contactperson1');
             $table->string('contactperson2'); 
             $table->unsignedBigInteger('contactperson1_number');

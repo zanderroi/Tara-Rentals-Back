@@ -2,8 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Customer\LoginController;
 use App\Http\Controllers\APICustomer\CustomerController;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Auth;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -19,7 +21,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/login', [LoginController::class, 'login']);
+
+
+
+
+
 
 Route::get('customers', [CustomerController::class, 'index']);
+Route::post('login/customer', [AuthController::class, 'customerLogin']);
 Route::post('customers', [CustomerController::class, 'store']);
+Route::middleware('auth:customer')->group(function () {
+    // Protected routes for customers
+    Route::post('logout/customer', [AuthController::class, 'customerLogout']);
+});
